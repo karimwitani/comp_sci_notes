@@ -14,6 +14,7 @@
     - [Handling competing processes](#handling-competing-processes)
   - [Databases](#databases)
     - [The relational model](#the-relational-model)
+    - [The object oriented model](#the-object-oriented-model)
 
 The electronic circuits on computers tasked with manipulating data are called CPUs (Central Processing Units). They used
 to be large multi-rack machines but now they are small and compact units called motherboards or microprocessors.
@@ -320,3 +321,62 @@ region and multiple processes have write access to specific regions.
 
 Data in relational databases can be though of as rectabgular tables called **relations**,
 each row is called a **tuple** and columns are called **attributes**
+
+Basic operations:
+
+Select : retrieve row/tuples from relations/tables that exibit certain characteristics
+
+```sql
+SELECT FIRST_NAME, LAST_NAME, ADDRESS FROM USERS WHERE LAST_NAME='SMITH'
+```
+
+Project: retrieve entire columns/attributes from tables/relations.
+
+```sql
+PROJECT TITLE, EMPLOYEE_ID, DATE_HIRED FROM EMPLOYEES
+```
+
+Join is used to combine two or more relations and create a composite relation.
+There must a column/attribute in both tables that can be used as the **key**
+on which to join.
+
+```sql
+SELECT TITLE, EMPLOYEE_ID, DATE_HIRED, SALARY
+FROM EMPLOYEES
+JOIN SALARIES
+  ON EMPLOYEES.EMPLOYEE_ID = SALARIES.EMPLOYEE_ID
+WHERE EMPLOYEES.EMPLOYEE_ID = "123"
+```
+
+!["how_computers_work_7_12.png"](assets/how_computers_work/how_computers_work_7_12.png)
+
+Each DBMS has their own way of retrieving data from mass storage and accept commands
+in SQL (strucured query language) to execute the above operations. SQL has a declarative
+syntax as oppossed to imperative. This means it describes the data that is retrieved
+as opposed to giving the various steps/operations needed to be performed.
+
+CRUD operations (Create, Retrieve, Update, Delete) are done via the following
+commands in SQL.
+
+```sql
+--Create
+INSERT INTO EMPLOYEES
+VALUES ('Sam','Smith','Accountant','123','June-30-1995')
+
+--Retrive
+SELECT FIRST_NAME, LAST_NAME, EMPLOYEE_ID
+FROM EMPLOYEES
+WHERE FIRST_NAME='Sam'
+
+--Update
+UPDATE EMPLOYEES
+SET TITLE='Senior Accountant'
+WHERE FIRST_NAME='Same'
+
+--Delete
+DELETE FROM EMPLOYEES
+WHERE FIRST_NAME='Same'
+```
+
+### The object oriented model
+
