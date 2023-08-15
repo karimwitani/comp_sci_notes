@@ -15,6 +15,14 @@
   - [Databases](#databases)
     - [The relational model](#the-relational-model)
     - [The object oriented model](#the-object-oriented-model)
+    - [Database integrity](#database-integrity)
+    - [The commit/rollback protocal](#the-commitrollback-protocal)
+    - [Locking](#locking)
+  - [File structures](#file-structures)
+    - [Flat files](#flat-files)
+    - [Indexed files](#indexed-files)
+    - [Hashed files](#hashed-files)
+  - [Data mining](#data-mining)
 
 The electronic circuits on computers tasked with manipulating data are called CPUs (Central Processing Units). They used
 to be large multi-rack machines but now they are small and compact units called motherboards or microprocessors.
@@ -380,3 +388,85 @@ WHERE FIRST_NAME='Same'
 
 ### The object oriented model
 
+Object oriented databases contain object which are collections of key-value pairs
+that are linked to each other to reflect their relationships.
+
+Objects that have the same sets of keys are called classes. For example an EMPLOYEE
+class would have the EMPLOYEE_ID, FIRST_NAME and LAST_NAME keys while a JOB class
+would have TITLE, SKILLS_LEVEL and JOB_ID keys.
+
+An object of one type can be linked to a collection of objects from another types.
+For example a JOB object could be related to many EMPLOYEE objects representing employees
+who all hold the same position.
+
+### Database integrity
+
+As databases get large there is an increased risk of errors, data corruption and
+malfunction due to a variety of reasons:
+
+- Big number of users connecting at once
+- Partial or incomplete operations
+- Operations that have conflicting objective which might lead to unexpected behavior
+
+### The commit/rollback protocal
+
+In the case of transactions that entail multiple operations, a random snapshot
+of the database would find it in an incosistent state.
+
+Consider the base of transfer of money between accounts, the first operation decreases
+one balance while the second increases the other. If there is a malfunction after
+the first operation but before the completion of the last operation of the transaction
+we end up with account balances that no longer add up.
+
+The solution is a log containing all transactions that is maintained by the DBMS.
+Before data is altered in the database a record is made in the log, called the **commit
+point**. This log allows the DBMS to reconstruct a transaction if the need arises.
+
+In such cases the DBMS can **rollback** the uncommited/incompleted transactions
+(undo the operations).
+
+However this design remains fragile and may lead to a problem called
+**cascading rollbacks**. Consider the case where an account balance is modified and
+that transaction is rolled back, however between the inital modification and the
+rollback other operations elsewhere in the system were conducted and used this new
+, erroneous and soon to be rolled back balance, to compute new values that will
+be stored in the database.
+
+### Locking
+
+There are two problems types that can arise if concurrent operations are conducted
+on the same database table/row.
+
+- Incorrect summary problem: Imagine an operation summing all the account balances
+  in a table while another is simultaneously adding/subtracting from specific accounts.
+  The resulting sum would be incaccurate.
+- Lost update problem: Imagine two transcation trying to subtract from the same
+  account balance. If both of them take the initial balance to compute the new balance
+  then the new balance will incorrectly reflect the effect of two subtractions.
+
+To solve this the DBMS keeps a queue and enforces transactions to complete sequentially
+before others can start executing. They also keep schedulers, very similar to those
+in CPUs that allow for time-sharing between transactions.
+
+The schedulers of DBMS enforce locking mechanisms to avoid the problems described.
+There are two types of locks, shared and exclusive. If a transaction only reads the
+data it can use a shared lock which allows other transactions to view the same data.
+However if the data will be altered then exclusive locks are used.
+
+If transaction are competing for access to the same lock, a veriety of algotrithms
+are available to resolve deadlocks and the order in which the lock is granted.
+A popular one is the wound-wait in which the older transaction gets priority
+(sort of like FIFO). Younger transactions holding locks being requested by older
+transaction relinquish the lock and are rolled back, only to restart from scratch
+once they get the lock again. Younger transactio get older as they wait and thus
+their priority increases with time untill they can't be bumped by other transactions.
+
+## File structures
+
+### Flat files
+
+### Indexed files
+
+### Hashed files
+
+## Data mining
