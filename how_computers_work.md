@@ -1,6 +1,11 @@
 # How computers work
 
 - [How computers work](#how-computers-work)
+  - [Data Storage](#data-storage)
+    - [Boolean operations](#boolean-operations)
+    - [Gates and Flip-Flops](#gates-and-flip-flops)
+    - [Hexadecimal notation](#hexadecimal-notation)
+    - [Main Memory](#main-memory)
   - [Data Manipulation](#data-manipulation)
     - [Basic CPU components](#basic-cpu-components)
     - [Machine language](#machine-language)
@@ -24,12 +29,81 @@
     - [Hashed files](#hashed-files)
   - [Data mining](#data-mining)
 
+## Data Storage
+
+All information in computers is stored as series of 1s and 0s called binary data.
+Such data can strung together in many way to represent anything from letters to
+entire movies.
+
+### Boolean operations
+
+1 representns **True** while 0 representents **False**. They are the basic
+building blocks of logic in computers and are attributes to mathemtician William
+Bool [William Boole - Wikipedia](https://en.wikipedia.org/wiki/George_Boole).
+
+There are three basic operations **AND, OR & XOR**
+
+- AND produces a truth when both inputs are true
+- OR produces a truth when either are true
+- XOR produces a truch only when **one** of the two inputs are true
+
+![how_computers_work_7_13.png](./assets/how_computers_work/how_computers_work_7_13.png)
+
+### Gates and Flip-Flops
+
+A device that produces a boolean output is called a **logic gate**. They can be made
+using gears/relays/optic devices and the 1/0 values are reflections of voltage levels.
+
+In modern computers, gates are created using small electronic switches called transistors.
+
+There is a common notation symbol for AND/OR/XOR//NOT gates:
+
+![how_computers_work_7_14.png](./assets/how_computers_work/how_computers_work_7_14.png)
+
+Flip flops are fundamental units of computer memory because they are circuits that
+produce an output of 1 or 0 which remains constant untill a pulse (a temporary
+change in voltage from 0 to 1).
+
+In the below example as long as the both input are unchanged the ouput will remain
+constant. If we pulse the upper input the output will switch to 1 and remain there
+and if we pulse on the lower end the ouput will switch to zero and remain there.
+
+Pulsing multiple times on the upper input will not change the output being 1, the
+same is true for the lower input.
+
+![how_computers_work_7_15.png](./assets/how_computers_work/how_computers_work_7_15.png)
+
+### Hexadecimal notation
+
+Bit patterns in computers tend to be in multiples of 4. Which is why base
+16 representation (hexadecimal) is prevalent. Because we start at index 0, 15 is
+the highest integer in base 16. We use letter A to F to represent integers from
+10 to 16.
+
+$$
+1111 = 2^{3}+2^{2}+2^{1}+2^{0} = 8 + 4 + 2 + 1 = 15
+$$
+
+![how_computers_work_7_16.jpeg](./assets/how_computers_work/how_computers_work_7_16.jpeg)
+
+### Main Memory
+
+Memory is grouped into cells, each 8 bits long (a byte). The leftmost bit is
+called higher-order/most significant bit. Each cell has an address which allows
+computers to locate and manipulate them.
+
+Pieces of data larger than 8 bits can be constructed using more than one memory
+address.
+
+Because each cell can be used independently, its called Random Access Memory (RAM).
+
+
+## Data Manipulation
+
 The electronic circuits on computers tasked with manipulating data are called CPUs
 (Central Processing Units). They used
 to be large multi-rack machines but now they are small and compact units called
 motherboards or microprocessors.
-
-## Data Manipulation
 
 ### Basic CPU components
 
