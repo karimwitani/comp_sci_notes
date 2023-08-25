@@ -16,6 +16,15 @@
       - [Skill: Changing of bases](#skill-changing-of-bases)
       - [Definition: Operations on logarithms](#definition-operations-on-logarithms)
       - [Skill: Solving exponential and log equations](#skill-solving-exponential-and-log-equations)
+  - [Vector \& Matrices](#vector--matrices)
+    - [What are vectors?](#what-are-vectors)
+    - [What are vector spaces?](#what-are-vector-spaces)
+      - [Properties of vector spaces](#properties-of-vector-spaces)
+    - [Unit Vectors](#unit-vectors)
+    - [Cartesian Vectors](#cartesian-vectors)
+    - [Vector Additions](#vector-additions)
+      - [Scalar/Dot Product](#scalardot-product)
+      - [Cross Product](#cross-product)
   - [Gradients \& Differentiation](#gradients--differentiation)
     - [Learning Outcomes](#learning-outcomes-2)
     - [Definition: Gradient of a function](#definition-gradient-of-a-function)
@@ -135,6 +144,123 @@ $\log{A} -\log{B} = log{\frac{A}{B}}$
 $n*log{A}=log{A^n}$
 
 #### Skill: Solving exponential and log equations
+
+## Vector & Matrices
+
+### What are vectors?
+
+- A vector is a mathematical object used to describe quantities that have a numerical
+  values and a specific direction in space.
+  - They're central in modeling physica quantities such as velocity, acceleration
+  & displacement
+- To distinguish them from scalar values, which only have numerical values, they
+  are denoted using arrow notation asd
+  - A scalar $v$ is not the same as $\overrightarrow{V}$ which is a vector
+- Vectors are represented by their components, numerical values that indicate how
+  much it extends over an axis in the coordinate system.
+  - In two dimensional space we can have $\overrightarrow{V}=(x,y)$
+  - In three dimensional space we can have $\overrightarrow{W}=(x,y,z)$
+- Vectors can be visualized as lines with the an initial and end points (a.k.a:
+  tails and heads).
+  - The length of the line segment is the magnitude of the vector.
+
+### What are vector spaces?
+
+- A vector space is a mathematical structure that defines a set of vectors and the
+  operations that can be exectuted on them.
+- Vector spaces are denoted with symbol $V=\mathbb{R}^n$
+- They can have any number of dimensions and vectors can be real or complex numbers
+
+#### Properties of vector spaces
+
+Certain properties must be met to qualify as a vector space:
+
+- Closure under addition:
+  - if $\overrightarrow{V}$ & $\overrightarrow{W}$ are in $\mathbb{R}^n$ then
+ $\overrightarrow{V} + \overrightarrow{W}$ is also in $\mathbb{R}^n$
+- Closure under scalar multiplication:
+  - For any scalar $x$ we $x * \overrightarrow{V}$ in in $\mathbb{R}^n$
+- Addition Associativity:
+  - $\overrightarrow{V}+(\overrightarrow{W} +\overrightarrow{Z})$ = ($\overrightarrow{V}+\overrightarrow{W})+\overrightarrow{Z}$
+- Addition Commutativity:
+  - $\overrightarrow{V}+\overrightarrow{W}=\overrightarrow{W} +\overrightarrow{V}$
+- Identity Element: For $\overrightarrow{O}$, the zero vector
+  - $\overrightarrow{V}+\overrightarrow{O}=\overrightarrow{V}$
+- Additive Inverse: For any $\overrightarrow{V}$ there exist $\overrightarrow{W}$
+  such that $\overrightarrow{V}+\overrightarrow{W}=\overrightarrow{O}$
+- Scalar Multiplicative Distributivity:
+  - $a*(\overrightarrow{V}+\overrightarrow{W})=a*\overrightarrow{V}+a*\overrightarrow{W}$
+- Vector Multiplicative Distributivity:
+  - $(a+b)*\overrightarrow{V}=a*\overrightarrow{V}+b*\overrightarrow{V}$
+- Scalar Multiplicative Associativity:
+  - $(a*b)*\overrightarrow{V}=a*(b*\overrightarrow{V})$
+
+### Unit Vectors
+
+- Unit vectors have a magnitude of 1. They are useful because they simpify computation.
+
+$i = \begin{bmatrix}1\\0\\0\\\end{bmatrix} \quad and  \quad \lVert i \rVert =1$
+
+- The process of converting a vector into unit form is called **normalizing**
+
+$r_u=\frac{1}{\lVert r \rVert}*\sqrt{x^2+y^2+z^2}$
+
+### Cartesian Vectors
+
+We define the cartesian unit vectors as:
+
+$i=\begin{bmatrix}1\\0\\0\\\end{bmatrix},j=\begin{bmatrix}0\\1\\0\\\end{bmatrix},k=\begin{bmatrix}0\\0\\1\\\end{bmatrix}$
+
+Any vector can be expressed as a combination of these vectors.
+
+$r=ai+bj+ck$
+
+Which is equivalent to writing
+
+$r=\begin{bmatrix}a\\b\\c\end{bmatrix}$
+
+This means that it magnitude is:
+
+${\lVert r \rVert}=\sqrt{a^2+b^2+c^2}$
+
+And that any combination $a+b$ can be written as:
+
+$r \pm u = (a\pm d)i + (b\pm e)j + (c\pm e)k$
+
+### Vector Additions
+
+Vector multiplication can be done in two ways. One leads to a scalar result and
+the other to a new vectors
+
+#### Scalar/Dot Product
+
+$s \cdot r = \lVert r \rVert \cdot \lVert r \rVert * \cos\beta$
+
+#### Cross Product
+
+Two vectors a & b can be multiplied together to produce a third vector t
+$$
+a*b=c
+$$
+
+$$
+\lVert c \rVert = \lVert a \rVert * \lVert b \rVert * \sin\beta
+$$
+
+If we have
+
+$$
+a=\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix},
+b=\begin{bmatrix}b_1\\b_2\\b_3\end{bmatrix}
+$$
+Then the cross product is
+$$
+a*b=\begin{bmatrix}a_2&a_3\\b_2&b_3\end{bmatrix}*i-\begin{bmatrix}a_1&a_3\\b_1&b_3\end{bmatrix}*j+\begin{bmatrix}a_1&a_2\\b_1&b_2\end{bmatrix}*k
+$$
+
+$$
+a*b=(a_2b_3-b_2a_3)*i-(a_1b_3-b_1a_3)*j+(a_1b_2-b_1a_2)*k
+$$
 
 ## Gradients & Differentiation
 
