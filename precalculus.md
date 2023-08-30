@@ -22,9 +22,19 @@
       - [Properties of vector spaces](#properties-of-vector-spaces)
     - [Unit Vectors](#unit-vectors)
     - [Cartesian Vectors](#cartesian-vectors)
-    - [Vector Additions](#vector-additions)
+    - [Vector Multiplication](#vector-multiplication)
       - [Scalar/Dot Product](#scalardot-product)
       - [Cross Product](#cross-product)
+    - [Transformations: Scaling, Rotations \& Translations](#transformations-scaling-rotations--translations)
+      - [Rotating a vector](#rotating-a-vector)
+      - [2D Translations](#2d-translations)
+      - [2D Scaling](#2d-scaling)
+      - [Referencing arbitraty points in transformations](#referencing-arbitraty-points-in-transformations)
+      - [2D Reflections](#2d-reflections)
+    - [Matrix addition and mutliplication](#matrix-addition-and-mutliplication)
+    - [Elementary Matric Row Operations](#elementary-matric-row-operations)
+    - [Row Echelon Form](#row-echelon-form)
+    - [The inverse of a matrix](#the-inverse-of-a-matrix)
   - [Gradients \& Differentiation](#gradients--differentiation)
     - [Learning Outcomes](#learning-outcomes-2)
     - [Definition: Gradient of a function](#definition-gradient-of-a-function)
@@ -227,14 +237,14 @@ And that any combination $a+b$ can be written as:
 
 $r \pm u = (a\pm d)i + (b\pm e)j + (c\pm e)k$
 
-### Vector Additions
+### Vector Multiplication
 
 Vector multiplication can be done in two ways. One leads to a scalar result and
 the other to a new vectors
 
 #### Scalar/Dot Product
 
-$s \cdot r = \lVert r \rVert \cdot \lVert r \rVert * \cos\beta$
+$s \cdot r = \lVert r \rVert \cdot \lVert s \rVert * \cos\beta$
 
 #### Cross Product
 
@@ -250,16 +260,172 @@ $$
 If we have
 
 $$
+a=a_1i+a_2j+a_3k\\
+b = b_1j+b_2j+b_3k
+$$
+$$
 a=\begin{bmatrix}a_1\\a_2\\a_3\end{bmatrix},
 b=\begin{bmatrix}b_1\\b_2\\b_3\end{bmatrix}
 $$
-Then the cross product is
+Then the cross product is:
 $$
 a*b=\begin{bmatrix}a_2&a_3\\b_2&b_3\end{bmatrix}*i-\begin{bmatrix}a_1&a_3\\b_1&b_3\end{bmatrix}*j+\begin{bmatrix}a_1&a_2\\b_1&b_2\end{bmatrix}*k
 $$
 
 $$
 a*b=(a_2b_3-b_2a_3)*i-(a_1b_3-b_1a_3)*j+(a_1b_2-b_1a_2)*k
+$$
+
+### Transformations: Scaling, Rotations & Translations
+
+#### Rotating a vector
+
+Rotating a vector procuces a new vector that has the same origin/tail and magnitude
+but differs in direction.
+
+!["precalculus_vectors_1"](assets/precalculus/precalculus_vectors_1.png)
+
+If $\alpha$ is the angle between the two vector $\overrightarrow{OP}$
+& $\overrightarrow{OP_R}$ then:
+
+$$
+\overrightarrow{OP_R} = \begin{bmatrix}x\cos\alpha+y\sin\alpha\\-x\sin\alpha+y\cos\alpha\end{bmatrix}
+$$
+
+#### 2D Translations
+
+$$
+x^{\prime}=x+t_x  \\
+y^{\prime}=y+t_y
+$$
+
+$$
+b=\begin{bmatrix}x^{\prime}\\y^{\prime}\\1\end{bmatrix}=
+\begin{bmatrix}1&0&t_x\\0&1&t_y\\0&0&1\end{bmatrix}\cdot
+\begin{bmatrix}x\\y\\1\end{bmatrix}
+$$
+
+!["precalculus_vectors_2"](assets/precalculus/precalculus_vectors_2.png)
+
+#### 2D Scaling
+
+$$
+x^{\prime}=s_xx  \\
+y^{\prime}=s_yy
+$$
+
+$$
+b=\begin{bmatrix}x^{\prime}\\y^{\prime}\\1\end{bmatrix}=
+\begin{bmatrix}s_x&0&0\\0&s_y&0\\0&0&1\end{bmatrix}\cdot
+\begin{bmatrix}x\\y\\1\end{bmatrix}
+$$
+
+!["precalculus_vectors_3"](assets/precalculus/precalculus_vectors_3.png)
+
+#### Referencing arbitraty points in transformations
+
+Tranformations are relative to the origin (0,0), to reference other points (p_x,p_y)
+we use the below:
+
+$$
+x^{\prime}=s_x(x-p_x) + p_x  \\
+y^{\prime}=s_y(x-p_y) + p_y
+$$
+
+$$
+b=\begin{bmatrix}x^{\prime}\\y^{\prime}\\1\end{bmatrix}=
+\begin{bmatrix}s_x&0&p_x(1-s_x)\\0&s_y&p_y(1-s_y)\\0&0&1\end{bmatrix}\cdot
+\begin{bmatrix}x\\y\\1\end{bmatrix}
+$$
+
+#### 2D Reflections
+
+Along the x axis:
+
+$$
+b=\begin{bmatrix}x^{\prime}\\y^{\prime}\\1\end{bmatrix}=
+\begin{bmatrix}-1&0&0\\0&1&0\\0&0&1\end{bmatrix}\cdot
+\begin{bmatrix}x\\y\\1\end{bmatrix}
+$$
+
+Along the y axis:
+
+$$
+b=\begin{bmatrix}x^{\prime}\\y^{\prime}\\1\end{bmatrix}=
+\begin{bmatrix}1&0&0\\0&-1&0\\0&0&1\end{bmatrix}\cdot
+\begin{bmatrix}x\\y\\1\end{bmatrix}
+$$
+
+### Matrix addition and mutliplication
+
+- $A+B=B+A$
+- $A+(B+C)=(A+B)+C$
+- $(cd)A=c(dA)$
+- $c(A+B)=cA+cB$
+- $(c+D)A=cA+dA$
+
+### Elementary Matric Row Operations
+
+A system of equations such as:
+
+$$
+x_1=a_1+b_1+c_2=d_1\\
+x_2=a_2+b_2+c_2=d_2\\
+x_3=a_3+b_3+c_3=d_3\\
+$$
+
+can be written in matrix form as:
+
+$$
+X=\begin{bmatrix}a_1&b_1&c_2\vdots&d_1\\a_1&b_1&c_2\vdots&d_2\\a_1&b_1&c_2\vdots&d_3\end{bmatrix}\cdot
+$$
+
+we can do the following operation while preseving equality:
+
+- Interchange two rows $R_1 \leftrightarrow R_2$
+- Multipy a row by non-zero constants $cR_1$
+- Add a multiple of a row to another $R_1+cR_2$
+
+!["precalculus_vectors_4"](assets/precalculus/precalculus_vectors_4.png)
+
+### Row Echelon Form
+
+Row echelon form allow us to solve systems of equations in matrix form, they have
+the following properties:
+
+- Any row of all zeros is at the bottom of the matrix
+- For all non-zero rows the first/leading element is a 1
+- Two successive rows, the leading 1 in the higher row is farther to the left than
+  the bottom row
+
+!["precalculus_vectors_5"](assets/precalculus/precalculus_vectors_5.png)
+
+Note: If every column that has a leading 1 has nothing but zeros above and below
+it is called a reduced row echelon form.
+
+!["precalculus_vectors_6"](assets/precalculus/precalculus_vectors_6.png)
+
+### The inverse of a matrix
+
+$$
+A^{-1}A=I_n=AA^{-1}
+$$
+
+The inverse of a matrice can be found with the Gauss-Jordan elimination (finding
+the reduced row echelon matrice) or (in the case of 2x2) using the determinant.
+
+!["precalculus_vectors_7"](assets/precalculus/precalculus_vectors_7.png)
+
+If a 2x2 matrice has a non-zero determinant it can be inverted using the below formula.
+
+$$
+A=\begin{bmatrix}a&b\\c&d\end{bmatrix}
+$$
+$$
+\det{A}=ad-bc
+$$
+$$
+A^{-1}=\frac{1}{det{A}}*\begin{bmatrix}d&-b\\-c&a\end{bmatrix}
 $$
 
 ## Gradients & Differentiation
