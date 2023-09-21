@@ -14,7 +14,7 @@
       - [Definition: Logarithmic Functions](#definition-logarithmic-functions)
       - [Skill: Convert exponentials to logs (\& vice versa)](#skill-convert-exponentials-to-logs--vice-versa)
       - [Skill: Changing of bases](#skill-changing-of-bases)
-      - [Definition: Operations on logarithms](#definition-operations-on-logarithms)
+      - [Definition: Operations on **logarithms**](#definition-operations-on-logarithms)
       - [Skill: Solving exponential and log equations](#skill-solving-exponential-and-log-equations)
   - [Vector \& Matrices](#vector--matrices)
     - [What are vectors?](#what-are-vectors)
@@ -35,6 +35,7 @@
     - [Elementary Matric Row Operations](#elementary-matric-row-operations)
     - [Row Echelon Form](#row-echelon-form)
     - [The inverse of a matrix](#the-inverse-of-a-matrix)
+    - [Minors and Cofactors](#minors-and-cofactors)
   - [Gradients \& Differentiation](#gradients--differentiation)
     - [Learning Outcomes](#learning-outcomes-2)
     - [Definition: Gradient of a function](#definition-gradient-of-a-function)
@@ -45,6 +46,17 @@
     - [Defintion: The product rule](#defintion-the-product-rule)
     - [Defintion: The quotient rule](#defintion-the-quotient-rule)
     - [Defintion: The chain rule](#defintion-the-chain-rule)
+  - [Statistics](#statistics)
+    - [Arithmetic Mean](#arithmetic-mean)
+    - [Varianace](#varianace)
+  - [Probalibilities](#probalibilities)
+    - [Complimentary events](#complimentary-events)
+    - [Measuring probabiity](#measuring-probabiity)
+    - [Indpendent events](#indpendent-events)
+    - [Union of events in the sample space](#union-of-events-in-the-sample-space)
+    - [Counting principles](#counting-principles)
+    - [Permutations](#permutations)
+    - [Combinations](#combinations)
 
 ## Exponential & Logarithmic Functions
 
@@ -145,9 +157,9 @@ Using natural logs:
 
 $\log_a{X} = \frac{ln_{X}}{ln_{a}}$
 
-#### Definition: Operations on logarithms
+#### Definition: Operations on **logarithms**
 
-$\log{A} +\log{B} = log{(A+B)}$
+$\log{A} +\log{B} = log{(A*B)}$
 
 $\log{A} -\log{B} = log{\frac{A}{B}}$
 
@@ -428,6 +440,23 @@ $$
 A^{-1}=\frac{1}{det{A}}*\begin{bmatrix}d&-b\\-c&a\end{bmatrix}
 $$
 
+### Minors and Cofactors 
+
+In square matrices larger than 2x2 it is possible to find the determinant using
+more complex formulas. We'll need to compute the determinants of smaller matrices
+that make up the larger matrice.
+
+If A is a square matrice then the minor $M_{ij}$ of the entry $a_{ij}$ is the determinant
+of the matrice C obtained by deleting the ith row and jth column. The cofactor $C_{ij}$
+is $(-1)^{i+j}M_{ij}$
+
+The determinant of a n*n matrix is the sum of any entries of a row (or column) multiplied
+by their respective cofactors.
+
+$$
+\det{A}=a_{11}M_{11}+a_{12}M_{12}+...a_{1n}M_{1n}+
+$$
+
 ## Gradients & Differentiation
 
 ### Learning Outcomes
@@ -589,3 +618,91 @@ $$
 $$
 
 TODO: EXAMPLES
+
+## Statistics
+
+### Arithmetic Mean
+
+$$
+mean = \bar{x}= \Sigma_{i=0}^{n}\frac{x_i}{n}
+$$
+
+### Varianace
+
+$$
+variance = \sigma^2 = \frac{\Sigma_{i=0}^{n}(x_i - \bar{x})^2}{n}
+$$
+
+$$
+standard deviation = \sigma = \sqrt{\frac{\Sigma_{i=0}^{n}(x_i - \bar{x})^2}{n}}
+$$
+
+## Probalibilities
+
+### Complimentary events
+
+If two events are mutually excelusive and if one doesn't happend then the other
+must, e.g: a lightbulb is either on or off
+
+$$
+P(A)=1-P(B)
+$$
+
+### Measuring probabiity
+
+$$
+P(event)= \frac{number of ways event can occur}{total number of possibilities}
+$$
+
+### Indpendent events
+
+If an event has no impact on the probality of the occurance of the next event, e.g:
+a roll of the dice. This is in contrast with dependent events (pulling a card for
+a deck without replacing it)
+
+If two events are independent:
+$$
+P(A\ and\ B) = P(A)*P(B)
+$$
+
+### Union of events in the sample space
+
+Unions can be thought of as **OR** statements. Imagine we ask, what are the chances
+of getting a card that is a heart OR a face. The probability of such an event is
+
+$$
+P(heart\ \cup\ face) = P(heart) + P(face) - P(heart\ \cap\ face)
+$$
+
+$P(heart\ \cap\ face)$ means intersection, such as a king of heart. It can thought
+of as a heart AND a face.
+
+!["precalculus_probability_1"](assets/precalculus/precalculus_probability_1.png)
+
+### Counting principles
+
+If two events $E_1$ & $E_2$ can occure respectivly in $m_1$ and $m_2$ ways then
+the number of ways the two events can occure is $E_1*E_2$
+
+### Permutations
+
+Permutations are used to count the number of ways $n$ elements can be arragned in
+order. The first position can be any of the elemnents, the second any of the **remaining**
+elements and so forth:
+
+$$
+P_n = n\cdot(n-1)\cdot(n-2)\cdot...\cdot2\cdot1
+$$
+
+If we take only a subset of element from a larger number of elements the number
+of permutations is:
+$$
+_{n}P_{r}=\frac{n!}{(n-r)!}
+$$
+
+### Combinations
+
+Combinations are similar to permutations but the order is not important
+$$
+_{n}C_{r}=\frac{n!}{(n-r)!*r!}
+$$
